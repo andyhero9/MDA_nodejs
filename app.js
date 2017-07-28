@@ -44,6 +44,7 @@ app.use('/users', users);
 
 //create by andy
 app.use(require('./routes/login'));
+app.use(require('./routes/userlist'));
 
 /*//session
 app.use(session({

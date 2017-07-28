@@ -18,13 +18,27 @@ router.post('/login', function(req, res, next) {
             if (result[0]['password'] == req.body.password) {
                 //cookie&session
                 req.session.sign = true;
-                console.log(req.session.user);
-                req.session.account_id = result[0]['id'];
+                req.session.id = result[0]['id'];
                 req.session.username = result[0]['username'];
+                req.session.department = result[0]['department'];
+                req.session.position = result[0]['position'];
+                req.session.email = result[0]['email'];
+                req.session.tel = result[0]['tel'];
                 res.cookie('user', req.body.Username, {
                     maxAge: 1000 * 1000, httpOnly: true
                 });
-                res.send("homepage");
+                if(result[0]['type'] == 'c'){
+                    res.redirect('/list');
+                    console.log('list');
+                }
+                else {
+                    res.render('userlist',{
+                        usersname:result[0]['username'],
+                        department:result[0]['department'],
+                        position:result[0]['position'],
+                        email:result[0]['email']
+                    });
+                }
             }
             else
             {
