@@ -3,12 +3,23 @@ var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
+var session = require("express-session");
 var bodyParser = require('body-parser');
 
 var index = require('./routes/index');
 var users = require('./routes/users');
 
 var app = express();
+
+//mysql
+var mysql = require('mysql');
+global.globalConnection=mysql.createConnection({
+    host : 'localhost' ,
+    user : 'test01' ,
+    password : '123456' ,
+    database : 'test',
+    port:'3306'
+});
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -22,10 +33,24 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use(session({
+    secret: 'keyboard cat',
+    resave: false,
+    saveUninitialized: true
+}));
+
 app.use('/', index);
 app.use('/users', users);
 
+//create by andy
 app.use(require('./routes/login'));
+
+/*//session
+app.use(session({
+    resave: true, // don't save session if unmodified
+    saveUninitialized: false, // don't create session until something stored
+    secret: 'ayhdbcu'
+}));*/
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
