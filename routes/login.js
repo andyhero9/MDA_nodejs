@@ -24,9 +24,11 @@ router.post('/login', function(req, res, next) {
                 req.session.position = result[0]['position'];
                 req.session.email = result[0]['email'];
                 req.session.tel = result[0]['tel'];
-                res.cookie('user', req.body.Username, {
-                    maxAge: 1000 * 1000, httpOnly: true
+                res.cookie('user', req.body.username, {
+                    maxAge: 1000 * 1000,
+                    httpOnly: true
                 });
+
                 if(result[0]['type'] == 'c'){
                     res.redirect('/list');
                     console.log('list');
@@ -42,7 +44,7 @@ router.post('/login', function(req, res, next) {
             }
             else
             {
-                res.send("密码错误哦!");
+                res.send("密码错误!");
             }
         }
         else
@@ -51,6 +53,34 @@ router.post('/login', function(req, res, next) {
         }
     });
 });
+
+router.get('/logout', function(req, res, next) {
+    if(req.session.sign){
+        res.clearCookie();
+        req.session.destroy();
+        res.render('login');
+    }
+    else {
+        res.render('login');
+    }
+});
+
+/*router.get('/session',function(req,res,next)
+{
+    if(req.session.sign)
+    {
+        for(var key in req.cookies)
+        {
+            console.log('cookie: '+key+' '+req.cookies[key]);
+        }
+        res.send('key');
+    }
+    else
+    {
+        res.send('no session');
+    }
+})*/
+
 
 
 module.exports = router;
