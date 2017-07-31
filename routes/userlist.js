@@ -2,14 +2,10 @@ var express = require('express');
 var router = express.Router();
 
 /* GET login listing. */
-router.get('/list', function(req, res, next) {
-    console.log(req.session.sign);
+router.get('/lists', function(req, res, next) {
     if(req.session.sign){
         res.render('list',{
-            username:req.session.username,
-            department:req.session.department,
-            position:req.session.position,
-            email:req.session.email
+            userinfo:req.session
         });
     }
     else {
@@ -17,9 +13,10 @@ router.get('/list', function(req, res, next) {
     }
 });
 
-router.get('/add',function (req,res,next) {
+router.get('/list',function (req,res,next) {
     if(req.session.sign) {
-        var selectSql = "select * from user as U join apply as A on U.id=A.id_user where U.id=" + escape('1');
+        console.log(req.session.uid);
+        var selectSql = "select * from user as U join apply as A on U.id=A.id_user where U.id=" + req.session.uid;
         console.log(selectSql);
         globalConnection.query(selectSql, function (err, result, fields) {
             if (err) {
@@ -27,11 +24,13 @@ router.get('/add',function (req,res,next) {
                 return;
             }
             if (result[0]) {
-                for (var i = 0; i < result.length; i++) {
-                    console.log(result[i].id_apply);
-                }
+                res.render('list',{
+                    userlist:result,
+                    userinfo:req.session
+                });
             }
             else {
+                res.redirect('/list');
             }
         });
     }

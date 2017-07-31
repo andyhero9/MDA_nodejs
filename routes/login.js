@@ -8,7 +8,7 @@ router.get('/login', function(req, res, next) {
 
 router.post('/login', function(req, res, next) {
     var data=req.body;
-    var selectSql = "select * from user where email="+"'"+escape(data.username)+"'";
+    var selectSql = "select * from user where email="+"'"+escape(data.email)+"'";
     globalConnection.query(selectSql,function(err,result,fields){
         if(err){
             console.log('getUserbyUsername err:' + err) ;
@@ -18,7 +18,7 @@ router.post('/login', function(req, res, next) {
             if (result[0]['password'] == req.body.password) {
                 //cookie&session
                 req.session.sign = true;
-                req.session.id = result[0]['id'];
+                req.session.uid = result[0]['id'];
                 req.session.username = result[0]['username'];
                 req.session.department = result[0]['department'];
                 req.session.position = result[0]['position'];
@@ -31,7 +31,6 @@ router.post('/login', function(req, res, next) {
 
                 if(result[0]['type'] == 'c'){
                     res.redirect('/list');
-                    console.log('list');
                 }
                 else {
                     res.render('userlist',{
