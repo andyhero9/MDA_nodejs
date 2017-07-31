@@ -3,7 +3,9 @@ var router = express.Router();
 
 /* GET login listing. */
 router.get('/login', function(req, res, next) {
-    res.render('login');
+    res.render('login',{
+        message:""
+    });
 });
 
 router.post('/login', function(req, res, next) {
@@ -43,12 +45,16 @@ router.post('/login', function(req, res, next) {
             }
             else
             {
-                res.send("密码错误!");
+                res.render('login',{
+                    message:"密码错误!"
+                });
             }
         }
         else
         {
-            res.send("用户不存在!");
+            res.render('login',{
+                message:"用户不存在!"
+            });
         }
     });
 });
@@ -57,10 +63,10 @@ router.get('/logout', function(req, res, next) {
     if(req.session.sign){
         res.clearCookie();
         req.session.destroy();
-        res.render('login');
+        res.redirect('login');
     }
     else {
-        res.render('login');
+        res.redirect('login');
     }
 });
 

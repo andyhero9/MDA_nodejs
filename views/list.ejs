@@ -90,26 +90,26 @@
                                 <th>申请时间</th>
                                 <th>申请字段</th>
                                 <th>申请状态</th>
-                                <th>关闭申请</th>
+                                <!--<th>关闭申请</th>-->
                             </tr>
                             </thead>
 
                             <tbody>
 
                             <% for(var i = 0;i < userlist.length;i++){%>
-                                <tr  onclick="parent.location='/details:1';">
+                                <tr  onclick="parent.location='/details=<%=userlist[i].id_apply%>';">
                                     <td><%= i+1 %></td>
                                     <td><%=userlist[i].id_apply%></td>
                                     <td><%=userlist[i].date_apply%></td>
                                     <td><%=userlist[i].data_field_apply%></td>
                                     <td><%=userlist[i].states%></td>
-                                    <td class="action-td">
+                                    <!--<td class="action-td">
                                         <a href="javascript:;" class="btn btn-small"
                                                 <% if(userlist[i].states == '已关闭') { %> disabled="" <% } else { %>  <% } %>
                                         >
                                             <i class="icon-remove"></i>
                                         </a>
-                                    </td>
+                                    </td>-->
                                 </tr>
                             <%} %>
 
