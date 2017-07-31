@@ -26,7 +26,8 @@ router.post('/login', function(req, res, next) {
                 req.session.position = result[0]['position'];
                 req.session.email = result[0]['email'];
                 req.session.tel = result[0]['tel'];
-                res.cookie('user', req.body.username, {
+                req.session.currentPage = 1;
+                    res.cookie('user', req.body.username, {
                     maxAge: 1000 * 1000,
                     httpOnly: true
                 });
