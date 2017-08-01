@@ -26,7 +26,7 @@ router.get('/list',function (req,res,next) {
                 var page = req.session.currentPage;
                 var m=page*10-10;
                 var n=(page-1)*10+10;
-                console.log(page,m,n);
+                //console.log(page,m,n);
                 var selectSql = "select * from user as U join apply as A on U.id=A.id_user where U.id="+ req.session.uid +
                     " order by date_apply desc limit " + m + "," + n;
                 globalConnection.query(selectSql, function (err, result, fields) {

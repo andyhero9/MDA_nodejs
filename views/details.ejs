@@ -98,8 +98,9 @@
 
                                     <div class="tab-content">
                                         <div class="tab-pane active" id="1">
-                                            <form id="edit-profiles" class="form-horizontal" action="./print.html"/>
+                                            <form id="edit-profiles" class="form-horizontal" action="/close" method="post"/>
                                             <fieldset>
+                                                <input type="hidden" id="aid" name="aid" value="<%= application[0].id_apply %>" />
 
                                                 <div class="control-group">
                                                     <label class="control-label" for="username"> 姓 名 </label>
@@ -190,10 +191,10 @@
 
                                                 <div class="form-actions">
                                                     <button type="submit" class="btn btn-primary">打印</button>
-                                                    <button class="btn">返回</button>
-                                                    <button class="btn btn-warning"
-                                                            <% if(application[0].states == '已关闭') { %> disabled="" <% } else { %>  <% } %>
-                                                    >关闭</button>
+                                                    <a class="btn" type="button" href="/list">返回</a>
+                                                    <a class="btn btn-warning" type="button"
+                                                            <% if(application[0].states == '已关闭') { %> disabled="" <% } else { %> href="/close=<%= application[0].id_apply %>" <% } %>
+                                                    >关闭</a>
                                                 </div> <!-- /form-actions -->
                                             </fieldset>
                                             </form>
