@@ -26,6 +26,7 @@ router.post('/apply', function(req, res, next) {
                 if (err) {
                     console.log('getUserbyUsername err:' + err);
                     return;
+
                 }
                 else {
                     //res.redirect('/list');
