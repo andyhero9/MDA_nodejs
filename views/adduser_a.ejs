@@ -1,69 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="utf-8" />
-    <title>会员数据申请管理</title>
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-
-    <link href="./css/bootstrap.min.css" rel="stylesheet" />
-    <link href="./css/bootstrap-responsive.min.css" rel="stylesheet" />
-
-
-    <link href="./css/font-awesome.css" rel="stylesheet" />
-
-    <link href="./css/adminia.css" rel="stylesheet" />
-    <link href="./css/adminia-responsive.css" rel="stylesheet" />
-
-
-    <link href="./css/pages/plans.css" rel="stylesheet" />
-
-    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
-    <!--[if lt IE 9]>
-    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /></head>
+<% include header.ejs %>
 
 <body>
-
-<div class="navbar navbar-fixed-top">
-
-    <div class="navbar-inner">
-
-        <div class="container">
-
-            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </a>
-
-            <a class="brand" href="#">会员数据申请管理</a>
-
-            <div class="nav-collapse">
-
-                <ul class="nav pull-right">
-
-                    <li class="divider-vertical">
-                        <li>
-                            <a href="#"><i class="icon-off"></i> 注销</a>
-                        </li>
-                    </li>
-
-                </ul>
-
-            </div> <!-- /nav-collapse -->
-
-        </div> <!-- /container -->
-
-    </div> <!-- /navbar-inner -->
-
-</div> <!-- /navbar -->
-
-
-
 
 <div id="content">
 
@@ -77,11 +17,11 @@
 
                     <div class="account-details">
 
-                        <span class="account-name">张先生</span>
+                        <span class="account-name"><%= userinfo.username %></span>
 
-                        <span class="account-role">CRM | 管理员</span>
+                        <span class="account-role"><%= userinfo.department %> | <%= userinfo.position %></span>
 
-                        <span class="account-actions">Mr.zhang@wyethnutrition.com</span>
+                        <span class="account-actions"><%= userinfo.email %></span>
 
                     </div> <!-- /account-details -->
 
@@ -91,29 +31,29 @@
 
                 <ul id="main-nav" class="nav nav-tabs nav-stacked">
 
-                    <li class="active">
-                        <a href="./adduser_a.html">
-                            <i class="icon-plus"></i>
-                            新增用户
-                        </a>
-                    </li>
-
                     <li>
-                        <a href="./userlist_a.html">
-                            <i class="icon-user"></i>
-                            用户列表
-                        </a>
-                    </li>
-
-                    <li>
-                        <a href="./applylist_a.html">
+                        <a href="/alist">
                             <i class="icon-th-list"></i>
                             申请列表
                         </a>
                     </li>
 
                     <li>
-                        <a href="./login.html">
+                        <a href="/ulist">
+                            <i class="icon-user"></i>
+                            用户列表
+                        </a>
+                    </li>
+
+                    <li class="active">
+                        <a href="/adduser">
+                            <i class="icon-plus"></i>
+                            新增用户
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="/logout">
                             <i class="icon-lock"></i>
                             注销
                         </a>
@@ -164,13 +104,13 @@
 
                                     <div class="tab-content">
                                         <div class="tab-pane active" id="1">
-                                            <form id="edit-profiles" class="form-horizontal" />
+                                            <form id="edit-profiles" class="form-horizontal" action="/adduser" method="post" />
                                             <fieldset>
 
                                                 <div class="control-group">
                                                     <label class="control-label" for="username"> 姓 名 </label>
                                                     <div class="controls">
-                                                        <input type="text" class="input-medium" id="username" value="" />
+                                                        <input type="text" class="input-medium" name="username" id="username" value="" />
                                                     </div> <!-- /controls -->
                                                 </div> <!-- /control-group -->
 
@@ -178,7 +118,7 @@
                                                 <div class="control-group">
                                                     <label class="control-label" for="department"> 部 门 </label>
                                                     <div class="controls">
-                                                        <input type="text" class="input-medium" id="department" value="" />
+                                                        <input type="text" class="input-medium" name="department" id="department" value="" />
                                                     </div> <!-- /controls -->
                                                 </div> <!-- /control-group -->
 
@@ -186,7 +126,7 @@
                                                 <div class="control-group">
                                                     <label class="control-label" for="position"> 职 位 </label>
                                                     <div class="controls">
-                                                        <input type="text" class="input-medium" id="position" value="" />
+                                                        <input type="text" class="input-medium" name="position" id="position" value="" />
                                                     </div> <!-- /controls -->
                                                 </div> <!-- /control-group -->
 
@@ -194,7 +134,7 @@
                                                 <div class="control-group">
                                                     <label class="control-label" for="phone">联系电话</label>
                                                     <div class="controls">
-                                                        <input type="tel" class="input-medium" id="phone" value="" />
+                                                        <input type="tel" class="input-medium" name="tel" id="phone" value="" />
                                                     </div> <!-- /controls -->
                                                 </div> <!-- /control-group -->
 
@@ -202,23 +142,37 @@
                                                 <div class="control-group">
                                                     <label class="control-label" for="email">E-mail</label>
                                                     <div class="controls">
-                                                        <input type="email" class="input-large" id="email" value="" />
+                                                        <input type="email" class="input-large" name="email" id="email" value="" />
                                                     </div> <!-- /controls -->
                                                 </div> <!-- /control-group -->
 
                                                 <div class="control-group">
-                                                    <label class="control-label" for="password1"> 密 码 </label>
+                                                    <label class="control-label" for="password">新密码</label>
                                                     <div class="controls">
-                                                        <input type="password" class="input-large" id="password1" value="" />
+                                                        <input type="password" class="input-large" name="password" id="password" value="" />
                                                     </div> <!-- /controls -->
                                                 </div> <!-- /control-group -->
 
                                                 <div class="control-group">
-                                                    <label class="control-label" for="password2">确认密码</label>
+                                                    <label class="control-label" for="cpassword">确认密码</label>
                                                     <div class="controls">
-                                                        <input type="password" class="input-large" id="password2" value="" />
+                                                        <input type="password" class="input-large" name="cpassword" id="cpassword" value="" />
                                                     </div> <!-- /controls -->
                                                 </div> <!-- /control-group -->
+
+                                                <div class="control-group">
+                                                    <label class="control-label" for="accounttype">用户类型</label>
+                                                    <div class="controls">
+                                                        <label class="radio">
+                                                            <input type="radio" name="type" value="c" checked="checked" id="accounttype" />
+                                                            普通用户
+                                                        </label>
+                                                        <label class="radio">
+                                                            <input type="radio" name="type" value="a" />
+                                                            管理员
+                                                        </label>
+                                                    </div>
+                                                </div>
 
                                                 <div class="form-actions">
                                                     <button type="submit" class="btn btn-primary">保存</button>
