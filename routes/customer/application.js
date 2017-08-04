@@ -11,7 +11,7 @@ router.get('/details=:aid', function(req, res, next) {
                 console.log('getUserbyUsername err:' + err);
                 return;
             }
-            if (result) {
+            if (result[0].id_user == req.session.uid) {
                 res.render('details',{
                     application:result,
                     userinfo:req.session
@@ -50,19 +50,21 @@ router.get('/close=:aid', function(req, res, next) {
 });
 
 router.post('/print', function(req, res, next) {
+    console.log(req.body.aid);
     if(req.session.sign){
-        //req.session.aid = req.params.aid;
-        var selectSql = "UPDATE `test`.`apply` SET `states`='已关闭' WHERE `id_apply`='" + req.params.aid + "'";
+        var selectSql = "select * from user as U join apply as A on U.id=A.id_user where A.id_apply='" + req.body.aid+"'";
         globalConnection.query(selectSql, function (err, result, fields) {
             if (err) {
                 console.log('getUserbyUsername err:' + err);
                 return;
             }
             if (result) {
-                res.redirect('/details='+req.params.aid);
+                res.render('print',{
+                    application:result
+                });
             }
             else {
-                res.redirect('/details='+req.params.aid);
+                res.redirect('/details='+req.body.aid);
             }
         });
     }

@@ -25,7 +25,7 @@ router.post('/login', function(req, res, next) {
                 req.session.department = result[0]['department'];
                 req.session.position = result[0]['position'];
                 req.session.email = result[0]['email'];
-                req.session.tel = result[0]['tel'];
+                req.session.type = result[0]['type'];
                 req.session.currentPage = 1;
                     res.cookie('user', req.body.username, {
                     maxAge: 1000 * 1000,
@@ -35,14 +35,11 @@ router.post('/login', function(req, res, next) {
                 if(result[0]['type'] == 'c'){
                     res.redirect('/list');
                 }
-                else {
-                    res.render('userlist',{
-                        usersname:result[0]['username'],
-                        department:result[0]['department'],
-                        position:result[0]['position'],
-                        email:result[0]['email']
-                    });
+                if(result[0]['type'] == 'a') {
+                    req.session.states = '全部'
+                    res.redirect('/alist');
                 }
+
             }
             else
             {

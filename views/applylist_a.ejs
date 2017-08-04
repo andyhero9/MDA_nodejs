@@ -1,69 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="utf-8" />
-    <title>会员数据申请</title>
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-
-    <link href="./css/bootstrap.min.css" rel="stylesheet" />
-    <link href="./css/bootstrap-responsive.min.css" rel="stylesheet" />
-
-
-    <link href="./css/font-awesome.css" rel="stylesheet" />
-
-    <link href="./css/adminia.css" rel="stylesheet" />
-    <link href="./css/adminia-responsive.css" rel="stylesheet" />
-
-
-    <link href="./css/pages/plans.css" rel="stylesheet" />
-
-    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
-    <!--[if lt IE 9]>
-    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /></head>
+<% include header.ejs %>
 
 <body>
-
-<div class="navbar navbar-fixed-top">
-
-    <div class="navbar-inner">
-
-        <div class="container">
-
-            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </a>
-
-            <a class="brand" href="#">会员数据申请管理</a>
-
-            <div class="nav-collapse">
-
-                <ul class="nav pull-right">
-
-                    <li class="divider-vertical">
-                    <li>
-                        <a href="#"><i class="icon-off"></i> 注销</a>
-                    </li>
-                    </li>
-
-                </ul>
-
-            </div> <!-- /nav-collapse -->
-
-        </div> <!-- /container -->
-
-    </div> <!-- /navbar-inner -->
-
-</div> <!-- /navbar -->
-
-
-
 
 <div id="content">
 
@@ -77,11 +17,11 @@
 
                     <div class="account-details">
 
-                        <span class="account-name">张先生</span>
+                        <span class="account-name"><%= userinfo.username %></span>
 
-                        <span class="account-role">CRM | 管理员</span>
+                        <span class="account-role"><%= userinfo.department %> | <%= userinfo.position %></span>
 
-                        <span class="account-actions">Mr.zhang@wyethnutrition.com</span>
+                        <span class="account-actions"><%= userinfo.email %></span>
 
                     </div> <!-- /account-details -->
 
@@ -106,14 +46,14 @@
                     </li>
 
                     <li   class="active">
-                        <a href="./applylist_a.html">
+                        <a href="/alist">
                             <i class="icon-th-list"></i>
                             申请列表
                         </a>
                     </li>
 
                     <li>
-                        <a href="./login.html">
+                        <a href="/logout">
                             <i class="icon-lock"></i>
                             注销
                         </a>
@@ -146,9 +86,16 @@
                         &nbsp;
                         <!--<i class="icon-th-list"></i>-->
                         <!--<h3>申请列表</h3>-->
-                        <button class="btn">全部</button>
-                        <button class="btn">申请中</button>
-                        <button class="btn">已关闭</button>
+                        <a class="btn" href="/alist?states=全部">全部</a>
+                        <a class="btn" href="/alist?states=申请中">申请中</a>
+                        <a class="btn" href="/alist?states=已关闭">已关闭</a>
+                        <a class="btn" href="/alist?states=已审核">已审核</a>
+                        <a class="btn" href="/alist?states=已拒绝">已拒绝</a>
+                        <div style="float: right; margin-right: 5px">
+                            <a href="/adown" class="btn">上页</a>
+                            <button class="btn"><%= userinfo.currentPage %>/<%= userinfo.pages %></button>
+                            <a href="/aup" class="btn">下页</a>
+                        </div>
                     </div> <!-- /widget-header -->
 
                     <div class="widget-content">
@@ -156,7 +103,7 @@
                         <table class="table table-striped table-bordered">
                             <thead>
                             <tr>
-                                <th>#</th>
+                                <!--<th>#</th>-->
                                 <th>申请编号</th>
                                 <th>申请人员</th>
                                 <th>申请时间</th>
@@ -166,70 +113,18 @@
                             </thead>
 
                             <tbody>
-                            <tr  onclick="parent.location='./check_a.html';">
-                                <td>1</td>
-                                <td>MDA00001</td>
-                                <td>赵先生</td>
-                                <td>2017/07/01</td>
-                                <td>姓名；年龄；联系电话；邮箱</td>
-                                <td>申请中</td>
+                            <% for(var i = 0;i < userlist.length;i++){%>
+                            <tr  onclick="parent.location='/check=<%=userlist[i].id_apply%>';">
+                                <!--<td><%= i+1 %></td>-->
+                                <!--<td><%=userlist[i].id_apply%></td>-->
+                                <td>MDA<%=(Array(6).join(0) + userlist[i].id_apply).slice(-6);%></td>
+                                <td><%=userlist[i].username%></td>
+                                <td><%=userlist[i].date_apply%></td>
+                                <td><%=userlist[i].data_field_apply%></td>
+                                <td><%=userlist[i].states%></td>
                             </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>MDA00023</td>
-                                <td>钱女士</td>
-                                <td>2017/07/02</td>
-                                <td>姓名；年龄；联系电话</td>
-                                <td>已关闭</td>
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td>MDA00046</td>
-                                <td>孙先生</td>
-                                <td>2017/07/08</td>
-                                <td>姓名；年龄；邮箱</td>
-                                <td>已关闭</td>
-                            </tr>
-                            <tr>
-                                <td>4</td>
-                                <td>MDA00055</td>
-                                <td>李女士</td>
-                                <td>2017/07/10</td>
-                                <td>姓名；联系电话；邮箱</td>
-                                <td>已关闭</td>
-                            </tr>
-                            <tr>
-                                <td>5</td>
-                                <td>MDA00076</td>
-                                <td>周先生</td>
-                                <td>2017/07/15</td>
-                                <td>姓名；邮箱</td>
-                                <td>申请中</td>
-                            </tr>
-                            <tr>
-                                <td>6</td>
-                                <td>MDA00084</td>
-                                <td>吴女士</td>
-                                <td>2017/07/19</td>
-                                <td>姓名；年龄；邮箱</td>
-                                <td>申请中</td>
-                            </tr>
-                            <tr>
-                                <td>7</td>
-                                <td>MDA00091</td>
-                                <td>郑先生</td>
-                                <td>2017/07/22</td>
-                                <td>姓名；年龄；联系电话；邮箱</td>
-                                <td>申请中</td>
-                            </tr>
-                            <tr>
-                                <td>8</td>
-                                <td>MDA00127</td>
-                                <td>王女士</td>
-                                <td>2017/07/25</td>
-                                <td>姓名；联系电话；邮箱</td>
-                                <td>申请中</td>
-                            </tr>
+                            <%} %>
+
                             </tbody>
                         </table>
 

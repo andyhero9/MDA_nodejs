@@ -5,7 +5,6 @@
 
 <body>
 
-
 <div id="content">
 
     <div class="container">
@@ -98,7 +97,7 @@
 
                                     <div class="tab-content">
                                         <div class="tab-pane active" id="1">
-                                            <form id="edit-profiles" class="form-horizontal" action="/print" method="post" />
+                                            <form id="edit-profiles" class="form-horizontal" action="/print" method="post" target="_blank" />
                                             <fieldset>
                                                 <input type="hidden" id="aid" name="aid" value="<%= application[0].id_apply %>" />
 
@@ -190,7 +189,9 @@
 
 
                                                 <div class="form-actions">
-                                                    <button type="submit" class="btn btn-primary">打印</button>
+                                                    <button type="submit" class="btn btn-primary"
+                                                            <% if(application[0].states == '已关闭') { %> disabled="" <% } else { %> <% } %>
+                                                    >打印</button>
                                                     <a class="btn" type="button" href="/list">返回</a>
                                                     <a class="btn btn-warning" type="button"
                                                             <% if(application[0].states == '已关闭') { %> disabled="" <% } else { %> href="/close=<%= application[0].id_apply %>" <% } %>

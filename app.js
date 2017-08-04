@@ -47,6 +47,10 @@ app.use(require('./routes/common/login'));
 app.use(require('./routes/customer/list'));
 app.use(require('./routes/customer/apply'));
 app.use(require('./routes/customer/application'));
+app.use(require('./routes/administrator/applicationlist'));
+app.use(require('./routes/administrator/userlist'));
+app.use(require('./routes/administrator/check'));
+
 
 
 /*//session

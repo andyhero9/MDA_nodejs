@@ -1,69 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="utf-8" />
-    <title>会员数据申请</title>
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-
-    <link href="./css/bootstrap.min.css" rel="stylesheet" />
-    <link href="./css/bootstrap-responsive.min.css" rel="stylesheet" />
-
-
-    <link href="./css/font-awesome.css" rel="stylesheet" />
-
-    <link href="./css/adminia.css" rel="stylesheet" />
-    <link href="./css/adminia-responsive.css" rel="stylesheet" />
-
-
-    <link href="./css/pages/plans.css" rel="stylesheet" />
-
-    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
-    <!--[if lt IE 9]>
-    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /></head>
+<% include header.ejs %>
 
 <body>
-
-<div class="navbar navbar-fixed-top">
-
-    <div class="navbar-inner">
-
-        <div class="container">
-
-            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </a>
-
-            <a class="brand" href="#">会员数据申请</a>
-
-            <div class="nav-collapse">
-
-                <ul class="nav pull-right">
-
-                    <li class="divider-vertical">
-                    <li>
-                        <a href="#"><i class="icon-off"></i> 注销</a>
-                    </li>
-                    </li>
-
-                </ul>
-
-            </div> <!-- /nav-collapse -->
-
-        </div> <!-- /container -->
-
-    </div> <!-- /navbar-inner -->
-
-</div> <!-- /navbar -->
-
-
-
 
 <div id="content">
 
@@ -77,11 +17,11 @@
 
                     <div class="account-details">
 
-                        <span class="account-name">张先生</span>
+                        <span class="account-name"><%= userinfo.username %></span>
 
-                        <span class="account-role">CRM | 管理员</span>
+                        <span class="account-role"><%= userinfo.department %> | <%= userinfo.position %></span>
 
-                        <span class="account-actions">Mr.zhang@wyethnutrition.com</span>
+                        <span class="account-actions"><%= userinfo.email %></span>
 
                     </div> <!-- /account-details -->
 
@@ -113,7 +53,7 @@
                     </li>
 
                     <li>
-                        <a href="./login.html">
+                        <a href="/logout">
                             <i class="icon-lock"></i>
                             注销
                         </a>
@@ -156,7 +96,7 @@
                                 <div class="tabbable">
                                     <ul class="nav nav-tabs">
                                         <li class="active">
-                                            <a href="#1" data-toggle="tab">详细信息</a>
+                                            <a href="#1" data-toggle="tab">状态：<%= application[0].states %></a>
                                         </li>
                                     </ul>
 
@@ -164,13 +104,12 @@
 
                                     <div class="tab-content">
                                         <div class="tab-pane active" id="1">
-                                            <form id="edit-profiles" class="form-horizontal" action="./print.html"/>
-                                            <fieldset>
+                                            <div id="edit-profiles" class="form-horizontal" />
 
                                                 <div class="control-group">
                                                     <label class="control-label" for="username"> 姓 名 </label>
                                                     <div class="controls">
-                                                        <input type="text" class="input-medium disabled" id="username" value="张先生" disabled="" />
+                                                        <input type="text" class="input-medium disabled" id="username" value="<%= application[0].username %>" disabled="" />
                                                     </div> <!-- /controls -->
                                                 </div> <!-- /control-group -->
 
@@ -178,7 +117,7 @@
                                                 <div class="control-group">
                                                     <label class="control-label" for="department"> 部 门 </label>
                                                     <div class="controls">
-                                                        <input type="text" class="input-medium disabled" id="department" value="CRM" disabled="" />
+                                                        <input type="text" class="input-medium disabled" id="department" value="<%= application[0].department %>" disabled="" />
                                                     </div> <!-- /controls -->
                                                 </div> <!-- /control-group -->
 
@@ -186,7 +125,7 @@
                                                 <div class="control-group">
                                                     <label class="control-label" for="position"> 职 位 </label>
                                                     <div class="controls">
-                                                        <input type="text" class="input-medium disabled" id="position" value="部门经理" disabled="" />
+                                                        <input type="text" class="input-medium disabled" id="position" value="<%= application[0].position %>" disabled="" />
                                                     </div> <!-- /controls -->
                                                 </div> <!-- /control-group -->
 
@@ -194,7 +133,7 @@
                                                 <div class="control-group">
                                                     <label class="control-label" for="phone">联系电话</label>
                                                     <div class="controls">
-                                                        <input type="text" class="input-medium disabled" id="phone" value="130****2534" disabled="" />
+                                                        <input type="text" class="input-medium disabled" id="phone" value="<%= application[0].tel %>" disabled="" />
                                                     </div> <!-- /controls -->
                                                 </div> <!-- /control-group -->
 
@@ -202,7 +141,7 @@
                                                 <div class="control-group">
                                                     <label class="control-label" for="email">E-mail</label>
                                                     <div class="controls">
-                                                        <input type="text" class="input-large disabled" id="email" value="Mr.zhang@wyethnutrition.com" disabled="" />
+                                                        <input type="text" class="input-large disabled" id="email" value="<%= application[0].email %>" disabled="" />
                                                     </div> <!-- /controls -->
                                                 </div> <!-- /control-group -->
 
@@ -210,7 +149,7 @@
                                                 <div class="control-group">
                                                     <label class="control-label" for="date">申请日期</label>
                                                     <div class="controls">
-                                                        <input type="date" class="input-large disabled" id="date" value="2017-07-01" disabled="" />
+                                                        <input type="date" class="input-large disabled" id="date" value="<%= application[0].date_apply %>" disabled="" />
                                                     </div> <!-- /controls -->
                                                 </div> <!-- /control-group -->
 
@@ -218,14 +157,14 @@
                                                 <div class="control-group">
                                                     <label class="control-label" for="data-field">申请原因</label>
                                                     <div class="controls">
-                                                        <textarea type="text" class="input-large disabled" id="data-field" disabled="">业务需求</textarea>
+                                                        <textarea type="text" class="input-large disabled" id="data-field" disabled=""><%= application[0].reason_apply %></textarea>
                                                     </div> <!-- /controls -->
                                                 </div> <!-- /control-group -->
 
                                                 <div class="control-group">
                                                     <label class="control-label" for="reason">申请会员数据字段</label>
                                                     <div class="controls">
-                                                        <textarea type="text" class="input-large disabled" id="reason" disabled="">姓名；年龄；联系电话；邮箱</textarea>
+                                                        <textarea type="text" class="input-large disabled" id="reason" disabled=""><%= application[0].data_field_apply %></textarea>
                                                     </div> <!-- /controls -->
                                                 </div> <!-- /control-group -->
 
@@ -255,12 +194,13 @@
 
 
                                                 <div class="form-actions">
-                                                    <button type="submit" class="btn btn-success">通过</button>
-                                                    <button type="submit" class="btn btn-danger">拒绝</button>
-                                                    <button class="btn">返回</button>
+                                                    <% if(application[0].states == '已关闭') { %>  <% } else { %>
+                                                    <a class="btn btn-success" href="/audit/?id=<%= application[0].id_apply %>&judge=已审核">通过</a>
+                                                    <a class="btn btn-warning" href="/audit/?id=<%= application[0].id_apply %>&judge=已拒绝">拒绝</a>
+                                                    <% } %>
+                                                    <a class="btn" href="/alist">返回</a>
                                                 </div> <!-- /form-actions -->
-                                            </fieldset>
-                                            </form>
+                                            </div>
                                         </div>
 
                                     </div>
