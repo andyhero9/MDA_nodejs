@@ -50,6 +50,7 @@ app.use(require('./routes/customer/application'));
 app.use(require('./routes/administrator/applicationlist'));
 app.use(require('./routes/administrator/userlist'));
 app.use(require('./routes/administrator/check'));
+app.use(require('./routes/administrator/adjust'));
 
 
 

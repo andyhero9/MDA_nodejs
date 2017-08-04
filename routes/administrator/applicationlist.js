@@ -4,7 +4,7 @@ var router = express.Router();
 /* GET login listing. */
 
 router.get('/alist?*',function (req,res,next) {
-    if(req.session.sign) {
+    if(req.session.sign && req.session.type=='a') {
         if(req.session.states != req.query.states){
             req.session.states = req.query.states;
             req.session.currentPage=1;
@@ -22,7 +22,7 @@ router.get('/alist?*',function (req,res,next) {
                 return;
             }
             if (result) {
-                var pages = Math.ceil(result[0]['count(*)']/10);
+                var pages = Math.ceil(result[0]['count(*)']/10 + 0.00001);
                 req.session.pages = pages;
                 var page = req.session.currentPage;
                 var m=page*10-10;

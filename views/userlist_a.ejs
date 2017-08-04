@@ -17,11 +17,11 @@
 
                     <div class="account-details">
 
-                        <span class="account-name">张先生</span>
+                        <span class="account-name"><%= userinfo.username %></span>
 
-                        <span class="account-role">CRM | 管理员</span>
+                        <span class="account-role"><%= userinfo.department %> | <%= userinfo.position %></span>
 
-                        <span class="account-actions">Mr.zhang@wyethnutrition.com</span>
+                        <span class="account-actions"><%= userinfo.email %></span>
 
                     </div> <!-- /account-details -->
 
@@ -32,28 +32,28 @@
                 <ul id="main-nav" class="nav nav-tabs nav-stacked">
 
                     <li>
-                        <a href="./adduser_a.html">
-                            <i class="icon-plus"></i>
-                            新增用户
+                        <a href="/alist">
+                            <i class="icon-th-list"></i>
+                            申请列表
                         </a>
                     </li>
 
-                    <li  class="active">
-                        <a href="./userlist_a.html">
+                    <li class="active">
+                        <a href="/ulist">
                             <i class="icon-user"></i>
                             用户列表
                         </a>
                     </li>
 
                     <li>
-                        <a href="./applylist_a.html">
-                            <i class="icon-th-list"></i>
-                            申请列表
+                        <a href="/adduser">
+                            <i class="icon-plus"></i>
+                            新增用户
                         </a>
                     </li>
 
                     <li>
-                        <a href="./login.html">
+                        <a href="/logout">
                             <i class="icon-lock"></i>
                             注销
                         </a>
@@ -85,6 +85,11 @@
                     <div class="widget-header">
                         <i class="icon-th-list"></i>
                         <h3>用户列表</h3>
+                        <div style="float: right; margin-right: 5px">
+                            <a href="/udown" class="btn">上页</a>
+                            <button class="btn"><%= userinfo.currentPage %>/<%= userinfo.pages %></button>
+                            <a href="/uup" class="btn">下页</a>
+                        </div>
                     </div> <!-- /widget-header -->
 
                     <div class="widget-content">
@@ -92,103 +97,23 @@
                         <table class="table table-striped table-bordered">
                             <thead>
                             <tr>
-                                <th>#</th>
                                 <th>部门</th>
                                 <th>职位</th>
                                 <th>姓名</th>
-                                <th>删除用户</th>
+                                <th>联系电话</th>
                             </tr>
                             </thead>
 
                             <tbody>
-                            <tr  onclick="parent.location='./adjustuser_a.html';">
-                                <td>1</td>
-                                <td>CRM</td>
-                                <td>部门经理</td>
-                                <td>赵先生</td>
-                                <td class="action-td">
-                                    <a href="javascript:;" class="btn btn-small">
-                                        <i class="icon-remove"></i>
-                                    </a>
-                                </td>
+
+                            <% for(var i = 0;i < userlist.length;i++){%>
+                            <tr  onclick="parent.location='/adjust=<%=userlist[i].id%>';">
+                                <td><%=userlist[i].department%></td>
+                                <td><%=userlist[i].position%></td>
+                                <td><%=userlist[i].username%></td>
+                                <td><%=userlist[i].tel%></td>
                             </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>CRM</td>
-                                <td>部门经理</td>
-                                <td>钱女士</td>
-                                <td class="action-td">
-                                    <a href="javascript:;" class="btn btn-small">
-                                        <i class="icon-remove"></i>
-                                    </a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td>CRM</td>
-                                <td>部门经理</td>
-                                <td>孙先生</td>
-                                <td class="action-td">
-                                    <a href="javascript:;" class="btn btn-small">
-                                        <i class="icon-remove"></i>
-                                    </a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>4</td>
-                                <td>CRM</td>
-                                <td>部门经理</td>
-                                <td>李女士</td>
-                                <td class="action-td">
-                                    <a href="javascript:;" class="btn btn-small">
-                                        <i class="icon-remove"></i>
-                                    </a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>5</td>
-                                <td>CRM</td>
-                                <td>部门经理</td>
-                                <td>周先生</td>
-                                <td class="action-td">
-                                    <a href="javascript:;" class="btn btn-small">
-                                        <i class="icon-remove"></i>
-                                    </a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>6</td>
-                                <td>CRM</td>
-                                <td>部门经理</td>
-                                <td>吴女士</td>
-                                <td class="action-td">
-                                    <a href="javascript:;" class="btn btn-small">
-                                        <i class="icon-remove"></i>
-                                    </a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>7</td>
-                                <td>CRM</td>
-                                <td>部门经理</td>
-                                <td>郑先生</td>
-                                <td class="action-td">
-                                    <a href="javascript:;" class="btn btn-small">
-                                        <i class="icon-remove"></i>
-                                    </a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>8</td>
-                                <td>CRM</td>
-                                <td>部门经理</td>
-                                <td>王女士</td>
-                                <td class="action-td">
-                                    <a href="javascript:;" class="btn btn-small">
-                                        <i class="icon-remove"></i>
-                                    </a>
-                                </td>
-                            </tr>
+                            <%} %>
 
                             </tbody>
                         </table>
