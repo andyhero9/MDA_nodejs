@@ -29,7 +29,7 @@ router.post('/login', function(req, res, next) {
                 req.session.type = result[0]['type'];
                 req.session.currentPage = 1;
                     res.cookie('user', req.body.username, {
-                    maxAge: 1000 * 1000,
+                    maxAge: 10 * 1000,
                     httpOnly: true
                 });
 
@@ -37,7 +37,8 @@ router.post('/login', function(req, res, next) {
                     res.redirect('/list');
                 }
                 if(result[0]['type'] == 'a') {
-                    req.session.states = '全部'
+                    req.session.states = '全部';
+                    req.session.uPage=1;
                     res.redirect('/alist');
                 }
 

@@ -115,8 +115,6 @@
                             <tbody>
                             <% for(var i = 0;i < userlist.length;i++){%>
                             <tr  onclick="parent.location='/check=<%=userlist[i].id_apply%>';">
-                                <!--<td><%= i+1 %></td>-->
-                                <!--<td><%=userlist[i].id_apply%></td>-->
                                 <td>MDA<%=(Array(6).join(0) + userlist[i].id_apply).slice(-6);%></td>
                                 <td><%=userlist[i].username%></td>
                                 <td><%=userlist[i].date_apply%></td>

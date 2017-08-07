@@ -3,9 +3,9 @@ var router = express.Router();
 
 /* GET login listing. */
 
-router.get('/adjust=:uid',function (req,res,next) {
+router.get('/adjust?*',function (req,res,next) {
     if(req.session.sign && req.session.type=='a') {
-        var selectSql = "select * from test.user where id='"+ req.params.uid +"'";
+        var selectSql = "select * from test.user where id='"+ req.query.uid +"'";
         globalConnection.query(selectSql, function (err, result, fields) {
             if (err) {
                 console.log('getUserbyUsername err:' + err);
@@ -14,7 +14,8 @@ router.get('/adjust=:uid',function (req,res,next) {
             if (result) {
                 res.render('adjustuser_a',{
                     userlist:result,
-                    userinfo:req.session
+                    userinfo:req.session,
+                    message:req.query.message
                 });
                 /*console.log(req.session.adjuststates);*/
             }
@@ -46,11 +47,11 @@ router.post('/adjust',function (req,res,next) {
             }
             if (result) {
                 /*req.session.adjuststates = "修改成功";*/
-                res.redirect('/adjust='+ req.body.uid)
+                res.redirect('/adjust?uid='+ req.body.uid +'&message=修改成功')
             }
             else {
                 /*req.session.adjuststates = "修改失败";*/
-                res.redirect('/adjust='+ req.body.uid)
+                res.redirect('/adjust?uid='+ req.body.uid +'&message=修改失败')
             }
         });
     }
@@ -71,7 +72,7 @@ router.get('/duser=:uid',function (req,res,next) {
                 res.redirect('/ulist');
             }
             else {
-                res.redirect('/adjust='+ req.params.uid)
+                res.redirect('/adjust?uid='+ req.params.uid +'&message=删除失败')
             }
         });
     }

@@ -14,7 +14,7 @@ router.get('/ulist',function (req,res,next) {
             if (result) {
                 var pages = Math.ceil(result[0]['count(*)']/10 + 0.00001);
                 req.session.pages = pages;
-                var page = req.session.currentPage;
+                var page = req.session.uPage;
                 var m=page*10-10;
                 var n=(page-1)*10+10;
                 //console.log(page,m,n);
@@ -54,7 +54,7 @@ router.get('/ulist',function (req,res,next) {
 router.get('/uup', function(req, res, next) {
     if(req.session.sign){
         if(req.session.pages > req.session.currentPage){
-            req.session.currentPage = req.session.currentPage + 1;
+            req.session.currentPage = req.session.uPage + 1;
         }
 
         res.redirect('/ulist');
@@ -68,7 +68,7 @@ router.get('/uup', function(req, res, next) {
 router.get('/udown', function(req, res, next) {
     if(req.session.sign){
         if(req.session.currentPage > 1){
-            req.session.currentPage = req.session.currentPage - 1;
+            req.session.currentPage = req.session.uPage - 1;
         }
 
         res.redirect('/ulist');

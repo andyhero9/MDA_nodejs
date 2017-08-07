@@ -96,7 +96,7 @@
                                 <div class="tabbable">
                                     <ul class="nav nav-tabs">
                                         <li class="active">
-                                            <a href="#1" data-toggle="tab">详细信息：</a>
+                                            <a href="#1" data-toggle="tab">详细信息：<%= message %></a>
                                         </li>
                                     </ul>
 
@@ -185,14 +185,14 @@
                                                 <div id="deletebox" class="modal hide fade in" style="display: none; ">
                                                     <div class="modal-header">
                                                         <a class="close" data-dismiss="modal">×</a>
-                                                        <h3>关闭申请</h3>
+                                                        <h3 style="color: #c63d37">删除用户</h3>
                                                     </div>
                                                     <div class="modal-body">
                                                         <h4>此过程不可逆！</h4>
-                                                        <p>请问您是否要关闭此次申请？</p>
+                                                        <p>请问您是否要删除该用户？</p>
                                                     </div>
                                                     <div class="modal-footer">
-                                                        <a href="/duser=<%=userlist[0].id%>" class="btn btn-danger">关闭</a>
+                                                        <a href="/duser=<%=userlist[0].id%>" class="btn btn-danger">删除</a>
                                                         <a href="#" class="btn" data-dismiss="modal">取消</a>
                                                     </div>
                                                 </div>

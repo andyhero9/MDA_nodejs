@@ -87,7 +87,7 @@
                         <h3>用户列表</h3>
                         <div style="float: right; margin-right: 5px">
                             <a href="/udown" class="btn">上页</a>
-                            <button class="btn"><%= userinfo.currentPage %>/<%= userinfo.pages %></button>
+                            <button class="btn"><%= userinfo.uPage %>/<%= userinfo.pages %></button>
                             <a href="/uup" class="btn">下页</a>
                         </div>
                     </div> <!-- /widget-header -->
@@ -107,7 +107,7 @@
                             <tbody>
 
                             <% for(var i = 0;i < userlist.length;i++){%>
-                            <tr  onclick="parent.location='/adjust=<%=userlist[i].id%>';">
+                            <tr  onclick="parent.location='/adjust?uid=<%=userlist[i].id%>';">
                                 <td><%=userlist[i].department%></td>
                                 <td><%=userlist[i].position%></td>
                                 <td><%=userlist[i].username%></td>

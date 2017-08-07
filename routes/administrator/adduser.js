@@ -6,7 +6,8 @@ var router = express.Router();
 router.get('/adduser',function (req,res,next) {
     if(req.session.sign && req.session.type=='a') {
         res.render('adduser_a',{
-            userinfo:req.session
+            userinfo:req.session,
+            messages:""
         });
     }
     else {
@@ -19,7 +20,7 @@ router.get('/adduser',function (req,res,next) {
 
 router.post('/adduser',function (req,res,next) {
     if(req.session.sign && req.session.type=='a') {
-        var selectSql = "INSERT INTO `test`.`user` (`username`, `tel`, `email`, `department`, `position`, `type`, `password`) " +
+        /*var selectSql = "INSERT INTO `test`.`user` (`username`, `tel`, `email`, `department`, `position`, `type`, `password`) " +
             "VALUES (" +
             "'"+ req.body.username +"', " +
             "'"+ req.body.tel +"', " +
@@ -39,6 +40,43 @@ router.post('/adduser',function (req,res,next) {
             }
             else {
                 res.redirect('/ulist');
+            }
+        });*/
+        var selectSql = "SELECT * FROM test.user where email='"+ req.body.email +"'";
+        globalConnection.query(selectSql, function (err, result, fields) {
+            if (err) {
+                console.log('getUserbyUsername err:' + err);
+                return;
+            }
+            if (result[0]) {
+                res.render('adduser_a',{
+                    userinfo:req.session,
+                    messages:"email重复"
+                });
+            }
+            else {
+                var selectSql = "INSERT INTO `test`.`user` (`username`, `tel`, `email`, `department`, `position`, `type`, `password`) " +
+                    "VALUES (" +
+                    "'"+ req.body.username +"', " +
+                    "'"+ req.body.tel +"', " +
+                    "'"+ req.body.email +"', " +
+                    "'"+ req.body.department +"', " +
+                    "'"+ req.body.position +"', " +
+                    "'"+ req.body.type +"', " +
+                    "'"+ req.body.password +"'" +
+                    ");";
+                globalConnection.query(selectSql, function (err, result, fields) {
+                    if (err) {
+                        console.log('getUserbyUsername err:' + err);
+                        return;
+                    }
+                    if (result) {
+                        res.redirect('/ulist');
+                    }
+                    else {
+                        res.redirect('/ulist');
+                    }
+                });
             }
         });
     }

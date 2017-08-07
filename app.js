@@ -80,4 +80,12 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
+/*var server = app.listen(3100, function () {
+    var host = server.address().address;
+    var port = server.address().port;
+    console.log("Running on %s:%s", host, port);
+});*/
+
+//server.listen(3000);
+
 module.exports = app;
