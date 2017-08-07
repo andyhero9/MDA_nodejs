@@ -26,7 +26,7 @@ var sendMail = function (recipient, subject, html) {
         from: config.email.user, // 发件地址
         to: recipient, // 收件列表
         subject: subject, // 标题
-        text:"hello",
+        //text:"hello",
         html: html // html 内容
     };
 

@@ -43,11 +43,6 @@
             border-radius: 0 !important;
         }
     </style>
-
-    <script>
-        window.print();
-    </script>
-
     <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -139,6 +134,13 @@
 <!-- Le javascript
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
+<script type="text/javascript">
+    window.onload=MyAutoRun();
+    function MyAutoRun() {
+        window.print();
+        return true;
+    }
+</script>
 <script src="./js/jquery-1.7.2.min.js"></script>
 <script src="./js/bootstrap.js"></script>
 

@@ -30,7 +30,7 @@ router.get('/check=:aid', function(req, res, next) {
 
 router.get('/audit/*', function(req, res, next) {
     if(req.session.sign){
-        var selectSql = "UPDATE `test`.`apply` SET `states`='"+req.query.judge+"' WHERE `id_apply`='" + req.query.id + "'";
+        var selectSql = "UPDATE `test`.`apply` SET `id_justice`='"+ req.session.uid +"', `states`='"+req.query.judge+"' WHERE `id_apply`='" + req.query.id + "'";
         globalConnection.query(selectSql, function (err, result, fields) {
             if (err) {
                 console.log('getUserbyUsername err:' + err);

@@ -6,7 +6,9 @@ var router = express.Router();
 router.get('/alist?*',function (req,res,next) {
     if(req.session.sign && req.session.type=='a') {
         if(req.session.states != req.query.states){
-            req.session.states = req.query.states;
+            if(req.query.states){
+                req.session.states = req.query.states;
+            }
             req.session.currentPage=1;
         }
         if(req.query.states == '全部' || req.query.states==null){

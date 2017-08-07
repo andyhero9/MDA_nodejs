@@ -96,7 +96,7 @@
                                 <div class="tabbable">
                                     <ul class="nav nav-tabs">
                                         <li class="active">
-                                            <a href="#1" data-toggle="tab">以下内容由管理员填写</a>
+                                            <a href="#1" data-toggle="tab">详细信息：</a>
                                         </li>
                                     </ul>
 
@@ -104,7 +104,7 @@
 
                                     <div class="tab-content">
                                         <div class="tab-pane active" id="1">
-                                            <form id="edit-profiles" class="form-horizontal" action="adjust" method="post" />
+                                            <form id="edit-profiles" class="form-horizontal" action="adjust" method="post" onsubmit="return checkIP()" />
                                             <fieldset>
                                                 <input type="hidden" id="aid" name="uid" value="<%=userlist[0].id%>" />
 
@@ -133,9 +133,9 @@
 
 
                                                 <div class="control-group">
-                                                    <label class="control-label" for="phone">联系电话</label>
+                                                    <label class="control-label" for="tel">联系电话</label>
                                                     <div class="controls">
-                                                        <input type="tel" class="input-medium" name="tel" id="phone" value="<%=userlist[0].tel%>" />
+                                                        <input type="tel" class="input-medium" name="tel" id="tel" value="<%=userlist[0].tel%>" />
                                                     </div> <!-- /controls -->
                                                 </div> <!-- /control-group -->
 
@@ -177,15 +177,31 @@
 
                                                 <div class="form-actions">
                                                     <button type="submit" class="btn btn-primary">修改</button>
-                                                    <a href="/duser=<%=userlist[0].id%>" class="btn btn-danger">删除</a>
+                                                    <a href="#deletebox" data-toggle="modal" class="btn btn-danger">删除</a>
                                                     <a href="/ulist" class="btn">返回</a>
+                                                    <!--<p href="/ulist" style="float: right; margin-right: 200px;margin-top: 5px;"></p>-->
                                                 </div> <!-- /form-actions -->
+
+                                                <div id="deletebox" class="modal hide fade in" style="display: none; ">
+                                                    <div class="modal-header">
+                                                        <a class="close" data-dismiss="modal">×</a>
+                                                        <h3>关闭申请</h3>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <h4>此过程不可逆！</h4>
+                                                        <p>请问您是否要关闭此次申请？</p>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <a href="/duser=<%=userlist[0].id%>" class="btn btn-danger">关闭</a>
+                                                        <a href="#" class="btn" data-dismiss="modal">取消</a>
+                                                    </div>
+                                                </div>
+
                                             </fieldset>
                                             </form>
                                         </div>
 
                                     </div>
-
 
                                 </div>
 
@@ -218,9 +234,51 @@
 <!-- Le javascript
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
+<script type="text/javascript">
+    function checkIP(){
+        var username=document.getElementById("username").value;//通过id获取需要验证的表单元素的值
+        if(username==""){//当上面获取的值为空时
+            alert("姓名不能为空");//弹出提示
+            return false;//返回false（不提交表单）
+        }
+        var department=document.getElementById("department").value;
+        if(department==""){
+            alert("部门不能为空");
+            return false;
+        }
+        var position=document.getElementById("position").value;
+        if(position==""){
+            alert("职位不能为空");
+            return false;
+        }
+        var tel=document.getElementById("tel").value;
+        if(tel==""){
+            alert("联系电话不能为空");
+            return false;
+        }
+        var email=document.getElementById("email").value;
+        if(email==""){
+            alert("email不能为空");
+            return false;
+        }
+        var password=document.getElementById("password").value;
+        if(password==""){
+            alert("密码不能为空");
+            return false;
+        }
+        var cpassword=document.getElementById("cpassword").value;
+        if(cpassword==""){
+            alert("密码不能为空");
+            return false;
+        }
+        if(cpassword!=password){
+            alert("两次密码不一致");
+            return false;
+        }
+        return true;//提交表单
+    }
+</script>
 <script src="./js/jquery-1.7.2.min.js"></script>
-
-
 <script src="./js/bootstrap.js"></script>
 
 </body>

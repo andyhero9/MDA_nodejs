@@ -97,7 +97,7 @@
 
                                     <div class="tab-content">
                                         <div class="tab-pane active" id="1">
-                                            <form id="edit-profiles" class="form-horizontal" method="post" action="/apply" />
+                                            <form id="edit-profiles" class="form-horizontal" method="post" action="/apply" onsubmit="return checkIP()"/>
                                             <fieldset>
 
                                                 <div class="control-group">
@@ -229,9 +229,27 @@
 <!-- Le javascript
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
+<script type="text/javascript">
+    function checkIP(){
+        var date=document.getElementById("date").value;//通过id获取需要验证的表单元素的值
+        if(date==""){//当上面获取的值为空时
+            alert("日期不能为空");//弹出提示
+            return false;//返回false（不提交表单）
+        }
+        var reason=document.getElementById("reason").value;
+        if(reason==""){
+            alert("申请原因不能为空");
+            return false;
+        }
+        var data_field=document.getElementById("data_field").value;
+        if(data_field==""){
+            alert("申请会员数据字段不能为空");
+            return false;
+        }
+        return true;//提交表单
+    }
+</script>
 <script src="./js/jquery-1.7.2.min.js"></script>
-
-
 <script src="./js/bootstrap.js"></script>
 
 </body>

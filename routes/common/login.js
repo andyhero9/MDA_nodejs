@@ -25,6 +25,7 @@ router.post('/login', function(req, res, next) {
                 req.session.department = result[0]['department'];
                 req.session.position = result[0]['position'];
                 req.session.email = result[0]['email'];
+                req.session.tel = result[0]['tel'];
                 req.session.type = result[0]['type'];
                 req.session.currentPage = 1;
                     res.cookie('user', req.body.username, {

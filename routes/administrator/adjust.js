@@ -16,6 +16,7 @@ router.get('/adjust=:uid',function (req,res,next) {
                     userlist:result,
                     userinfo:req.session
                 });
+                /*console.log(req.session.adjuststates);*/
             }
             else {
                 res.redirect('/ulist');
@@ -44,9 +45,11 @@ router.post('/adjust',function (req,res,next) {
                 return;
             }
             if (result) {
+                /*req.session.adjuststates = "修改成功";*/
                 res.redirect('/adjust='+ req.body.uid)
             }
             else {
+                /*req.session.adjuststates = "修改失败";*/
                 res.redirect('/adjust='+ req.body.uid)
             }
         });
