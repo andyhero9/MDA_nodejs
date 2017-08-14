@@ -73,13 +73,24 @@
 							<input type="password" class="" id="password" name="password" onkeyup="noblank()" />
 						</div>
 					</div>
+
+					<div class="control-group">
+						<label class="control-label" for="checkcode">验证码</label>
+                        <div class="controls">
+                            <input type="text" autocomplete="off" class="" id="checkcode" name="checkcode" onkeyup="noblank()" />
+                        </div>
+					</div>
+
 				</fieldset>
-				
+
+                <div class="pull-left" style="width: 40%"  onclick="checkcode()">
+                    <img id="checkimg" name="checkimg" style="width:100px;height: 30px;" src="" title="点击刷新" />
+                </div>
 				<div id="remember-me" class="pull-left">
 					<input type="hidden" name="remember" id="remember" disabled="" />
 					<label id="remember-label" for="remember"><%= message %></label>
 				</div>
-				
+
 				<div class="pull-right">
 					<button type="submit" class="btn btn-warning btn-large" id="lbtu" disabled>
 						登录
@@ -107,12 +118,33 @@
 <script src="./js/bootstrap.js"></script>
 
 <script language="javascript" type="text/javascript">
+
+    window.onload = function()
+    {
+        checkcode();
+    }
+
     var button01=document.getElementById("lbtu");
     function noblank () {
-        if(document.lform.email.value!="" && document.lform.password.value!="") {
+        if(document.lform.email.value!="" && document.lform.password.value!="" && document.lform.checkcode.value!="") {
             button01.disabled=false;
         } else{ button01.disabled=true;
         }
+    }
+
+    function checkcode() {
+        $.ajax({
+            type: "get",
+            async: false,
+            url: "/checkcode",
+            dataType: "json",
+            success: function(data){
+                document.getElementById("checkimg").src = "data:image/png;base64,"+data.imgbase64;
+            },
+            error: function(){
+                alert("验证码错误!");
+            }
+        });
     }
 </script>
 
