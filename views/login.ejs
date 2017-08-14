@@ -59,18 +59,18 @@
 	
 	<div id="login-content" class="clearfix">
 	
-	<form action="./login" method="post" />
+	<form action="./login" method="post" name="lform" />
 				<fieldset>
 					<div class="control-group">
 						<label class="control-label" for="email">用户名/邮箱</label>
 						<div class="controls">
-							<input type="text" class="" id="email" name="email" />
+							<input type="email" class="" id="email" name="email" onkeyup="noblank()" />
 						</div>
 					</div>
 					<div class="control-group">
 						<label class="control-label" for="password">密码</label>
 						<div class="controls">
-							<input type="password" class="" id="password" name="password" />
+							<input type="password" class="" id="password" name="password" onkeyup="noblank()" />
 						</div>
 					</div>
 				</fieldset>
@@ -81,7 +81,7 @@
 				</div>
 				
 				<div class="pull-right">
-					<button type="submit" class="btn btn-warning btn-large">
+					<button type="submit" class="btn btn-warning btn-large" id="lbtu" disabled>
 						登录
 					</button>
 				</div>
@@ -92,7 +92,7 @@
 		
 		<div id="login-extra">
 			
-			<p>忘记密码? <a href="mailto: 767046365@qq.com" title="请输入邮箱后点击">请联系管理员.</a></p>
+			<p>忘记密码? <a href="/forget" title="请点击">请联系管理员.</a></p>
 			
 		</div> <!-- /login-extra -->
 	
@@ -104,9 +104,17 @@
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
 <script src="./js/jquery-1.7.2.min.js"></script>
-
-
 <script src="./js/bootstrap.js"></script>
+
+<script language="javascript" type="text/javascript">
+    var button01=document.getElementById("lbtu");
+    function noblank () {
+        if(document.lform.email.value!="" && document.lform.password.value!="") {
+            button01.disabled=false;
+        } else{ button01.disabled=true;
+        }
+    }
+</script>
 
   </body>
 </html>

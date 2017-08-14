@@ -86,6 +86,34 @@ router.get('/logout', function(req, res, next) {
     }
 })*/
 
+router.get('/forget', function(req, res, next) {
+    res.render('forgetpass',{
+        message:""
+    });
+});
+
+router.post('/forget', function(req, res, next) {
+    var data=req.body;
+    var selectSql = "select * from user where email="+"'"+escape(data.email)+"'";
+    globalConnection.query(selectSql,function(err,result,fields){
+        if(err){
+            console.log('getUserbyUsername err:' + err) ;
+            return ;
+        }
+        if(result[0]) {
+            res.render('forgetpass',{
+                message:"密码已发送到邮箱，请查收。"
+            });
+        }
+        else
+        {
+            res.render('forgetpass',{
+                message:"用户不存在!"
+            });
+        }
+    });
+});
+
 
 
 module.exports = router;
