@@ -10,6 +10,10 @@ router.get('/login', function(req, res, next) {
     });
 });
 
+router.get('/', function(req, res, next) {
+    res.redirect("login");
+});
+
 router.post('/login', function(req, res, next) {
     var data=req.body;
     var selectSql = "select * from user where email="+"'"+escape(data.email)+"'";
@@ -72,10 +76,10 @@ router.get('/logout', function(req, res, next) {
     if(req.session.sign){
         res.clearCookie();
         req.session.destroy();
-        res.redirect('login');
+        res.redirect('/login');
     }
     else {
-        res.redirect('login');
+        res.redirect('/login');
     }
 });
 

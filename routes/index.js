@@ -30,7 +30,7 @@ router.get('/', function(req, res, next) {
     res.render('index', { title: 'Express',srcads:ary[1] });
 });*/
 
-var captchapng = require('captchapng');
+/*var captchapng = require('captchapng');
 router.get('/', function(req, res, next) {
     var code = parseInt(Math.random() * 9000 + 1000);
     req.session.checkcode = code;
@@ -39,7 +39,7 @@ router.get('/', function(req, res, next) {
     p.color(80, 80, 80, 255);
     var img = p.getBase64();
     res.render('index', { title: 'Express',srcads:img });
-});
+});*/
 
 module.exports = router;
 
